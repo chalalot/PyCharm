@@ -1,16 +1,40 @@
-# This is a sample Python script.
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+from __future__ import print_function
+
+import sys
+import json
+import jsonpatch
+import argparse
 
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+parser = argparse.ArgumentParser(description='Diff two JSON files')
+parser.add_argument('FILE1', type=argparse.FileType('r'))
+parser.add_argument('FILE2', type=argparse.FileType('r'))
+parser.add_argument('--indent', type=int, default=None,
+                    help='Indent output by n spaces')
+parser.add_argument('-v', '--version', action='version',
+                    version='%(prog)s ' + jsonpatch.__version__)
 
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
+def main():
+  try:
+    diff_files()
+  except KeyboardInterrupt:
+    sys.exit(1)
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+
+def diff_files():
+  """ Diffs two JSON files and prints a patch """
+  args = parser.parse_args()
+  doc1 = json.load(args.FILE1)
+  doc2 = json.load(args.FILE2)
+  patch = jsonpatch.make_patch(doc1, doc2)
+  if patch.patch:
+    patch.patch.sort(key=lambda op: op["path"])
+    print(json.dumps(patch.patch, indent=args.indent))
+    sys.exit(1)
+
+if __name__ == "__main__":
+  main()

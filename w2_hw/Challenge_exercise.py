@@ -12,9 +12,9 @@ def reach_one(n):
         elif n == 1:
             break
     return lst
-
-new_lst = []
-for i in range (2, 101):
-    new_lst.append(max(reach_one(i)))
-
-print(max(new_lst))
+print(reach_one(123))
+# new_lst = []
+# for i in range (2, 101):
+#     new_lst.append(max(reach_one(i)))
+#
+# print(max(new_lst))
