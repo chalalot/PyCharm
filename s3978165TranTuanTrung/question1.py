@@ -3,19 +3,30 @@
 # Semester: 2022C
 # Assignment: 1
 # Author: Tran Tuan Trung
-# Created date: 19/11/2022
-# Last modified date: 19/11/2022
+# Created date: 17/12/2022
+# Last modified date: 17/12/2022
 
-def is_divisible_by_7(n): #define the function
-    for i in range (n, 4 * n): #call a loop that runs from n(inclusive) to 4n(exclusive)
-        if i % 7 == 0: #condition
-            print(int(i))
+given_str = input(" Enter a string: ")
 
+def character_count(n):
+    '''
+    return the number of letters, digits and symbols included in the given string
+    :param n:
+    :return: the total number of each character types
+    '''
+    al = 0
+    dgt = 0
+    sym = 0
+    for i in n:
+        if i.isalpha():
+            al += 1
+        elif i.isdigit():
+            dgt += 1
+        else:
+            sym += 1
 
-num = int(input("Enter an interger number: ")) #ask for input
-while True:
-    if num > 2:
-        print(is_divisible_by_7(num)) #print the answer using num as a parameter
-        break
-    else:
-        print("invalid input, please enter an interger that is greater than 2.") #description for invalid input
+    print("Letters:", al)
+    print("Digits:", dgt)
+    print("Symbols:", sym)
+
+character_count(given_str)

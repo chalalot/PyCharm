@@ -3,48 +3,32 @@
 # Semester: 2022C
 # Assignment: 1
 # Author: Tran Tuan Trung
-# Created date: 19/11/2022
-# Last modified date: 19/11/2022
+# Created date: 17/12/2022
+# Last modified date: 17/12/2022
+def find_max(nums):
+    '''
+    seperate sequence of numbers and then find the maximum value and all their position
+    :param nums: string
+    :return: string
+    '''
+    nums = str(nums).split()
 
-import turtle
+    for i in nums:
+        if i == ' ':
+            nums.remove(i)
 
-win = turtle.Screen()# create a screen and a turtle
-t = turtle.Turtle()
-t.speed(10)
+    num_list = [float(i) for i in nums]
+    max_num = max(num_list)
 
-def draw_border():
-    t.pensize(5) #setup customized pen
-    t.pencolor("blue")
-    t.penup()
-    t.goto(-200,-100) #go to location to align the flag to center
-    t.pendown()
-    t.fillcolor("red")#fill color for the flag
-    t.begin_fill()
-    for i in range (2): #draw the flag with desired size
-        t.forward(400)
-        t.left(90)
-        t.forward(200)
-        t.left(90)
-    t.end_fill()
-def draw_star():
-    t.pencolor("white")
-    t.fillcolor("white")
-    t.penup()
-    t.goto(-35,-21) #aligning the star
-    t.pendown()
-    t.fillcolor("white")
-    t.begin_fill()
-    for i in range (3): #draw the first triangle
-        t.forward(70)
-        t.left(120)
-    t.goto(35,21) #aligning the second triangle
-    t.left(180)
-    for i in range(3): #draw the second triangle
-        t.forward(70)
-        t.left(120)
-    t.end_fill()
-    t.hideturtle()
+    if num_list.count(max_num) == 1:
+        return 'The maximum value is ' + str(max_num) + ' at position ' + str(num_list.index(max_num))
+    else:
+        #get all the position of the max number
+        pos = [str(i) for i, x in enumerate(num_list) if x == max_num]
+        #turn list into string
+        pos = ','.join(pos)
+        return 'The maximum value is ' + str(max_num) + ' at position ' + pos
 
-draw_border()
-draw_star()
-win.exitonclick()
+
+sequence = input('Enter sequence: ')
+print(find_max(sequence))

@@ -3,21 +3,26 @@
 # Semester: 2022C
 # Assignment: 1
 # Author: Tran Tuan Trung
-# Created date: 19/11/2022
-# Last modified date: 19/11/2022
+# Created date: 17/12/2022
+# Last modified date: 17/12/2022
 
-def factorial(n): #declare function
-    if n == 1 or n == 0: # the factorial of 0 and 1 is 1
-        return 1
-    else:
-        return n * factorial(n - 1) #if n still larger than 1, the factorial equals to n * (n-1)!
-                                    #calls the function itself until n = 1
+def filter_vowels(strng):
+    '''
+    filter out words that don't start with vowels
+    the sequence is separated by commas
+    :param str
+    :return: string
+    '''
+    vowels = ['a', 'e', 'i', 'o', 'u']
+    string = strng.split(',')
+    word_list = []
+    filter = []
+    for i in string:
+        word_list.append(str(i))
+    for word in word_list:
+        if word[0].lower() not in vowels:
+            filter.append(word)
+    return filter
 
-while True: #a loop to ask for input
-    num = int(input("Enter a number: "))
-    if num >= 0:#when it is satisfied, break the loop
-        break
-    else: #while not satisfied, ask for input again
-        print("Factorial does not exist for negative number")
-
-print("The factorial of", num, "is", factorial(num))
+user = str(input('Enter the words separated by comma: '))
+print(filter_vowels(user))

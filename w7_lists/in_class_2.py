@@ -19,7 +19,7 @@ for j in range (rows):
             count = 0
             ls1 = []
 
-print(ls2)
+print(*ls2,sep="\n")
 print(ls1)
 
 
